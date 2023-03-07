@@ -2,6 +2,8 @@ package org.dominio;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -43,6 +46,17 @@ public class Jugador implements Serializable {
     @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     @JoinColumn(name = "idDireccion", nullable = false)
     private Direccion direccion;
+    
+    @OneToMany(mappedBy = "jugador")
+    private List<VideojuegoJugador> jugadoresDuenios;
+    
+//    @ManyToMany()
+//    @JoinTable(
+//            name = "videojuegosJugadores",
+//            joinColumns = @JoinColumn(name = "idJugador"),
+//            inverseJoinColumns = @JoinColumn(name = "idVideojuego")
+//    )
+//    private List<Videojuego> videojuegos;
 
     public Jugador() {
     }
@@ -50,21 +64,21 @@ public class Jugador implements Serializable {
     public Jugador(String pseudonimo, Sexo sexo, Calendar fechaNacimiento) {
         this.pseudonimo = pseudonimo;
         this.sexo = sexo;
-        this.fechaNacimiento = fechaNacimiento;
+        // this.fechaNacimiento = fechaNacimiento;
     }
 
     public Jugador(Long id, String pseudonimo, Sexo sexo, Calendar fechaNacimiento) {
         this.id = id;
         this.pseudonimo = pseudonimo;
         this.sexo = sexo;
-        this.fechaNacimiento = fechaNacimiento;
+        // this.fechaNacimiento = fechaNacimiento;
     }
 
     public Jugador(String pseudonimo, Sexo sexo, Calendar fechaNacimiento, Direccion direccion) {
         this.pseudonimo = pseudonimo;
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
-        this.direccion = direccion;
+        // this.direccion = direccion;
     }
 
     public Jugador(Long id, String pseudonimo, Sexo sexo, Calendar fechaNacimiento, Direccion direccion) {
@@ -73,6 +87,7 @@ public class Jugador implements Serializable {
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
+        // this.fechaNacimiento = fechaNacimiento;
     }
     
     public Long getId() {
@@ -115,6 +130,38 @@ public class Jugador implements Serializable {
         this.direccion = direccion;
     }
 
+    public List<VideojuegoJugador> getJugadoresDuenios() {
+        return jugadoresDuenios;
+    }
+
+    public void setJugadoresDuenios(List<VideojuegoJugador> jugadoresDuenios) {
+        this.jugadoresDuenios = jugadoresDuenios;
+    }
+    
+    public void addJuegoComprado(VideojuegoJugador juegoComprado) {
+        if (this.jugadoresDuenios == null) {
+            this.jugadoresDuenios = new LinkedList<>();
+        }
+        
+        this.jugadoresDuenios.add(juegoComprado);
+    }
+
+//    public List<Videojuego> getVideojuegos() {
+//        return videojuegos;
+//    }
+//
+//    public void setVideojuegos(List<Videojuego> videojuegos) {
+//        this.videojuegos = videojuegos;
+//    }
+//
+//    public void addVideojuego(Videojuego videojuego) {
+//        if (this.videojuegos == null) {
+//            this.videojuegos = new LinkedList<>();
+//        }
+//        
+//        this.videojuegos.add(videojuego);
+//    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

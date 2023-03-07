@@ -6,6 +6,7 @@
     <class>org.dominio.Videojuego</class>
     <class>org.dominio.Jugador</class>
     <class>org.dominio.Direccion</class>
+    <class>org.dominio.VideojuegoJugador</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/steam130?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

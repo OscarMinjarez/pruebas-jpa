@@ -30,11 +30,16 @@ public class Videojuego implements Serializable {
     @Column(name = "puntaje", nullable = true)
     private Integer puntaje;
     
-    @Column(name="desarrolladora", nullable=false)
+    @Column(name="desarrolladora", nullable = false)
     private String desarrolladora;
     
     @OneToMany(mappedBy = "videojuego", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     private List<Logro> logros;
+    
+    private List<VideojuegoJugador> jugadores;
+    
+//    @ManyToMany(mappedBy = "videojuegos")
+//    private List<Jugador> jugadores;
 
     public Videojuego() {
     }
@@ -99,6 +104,22 @@ public class Videojuego implements Serializable {
     public void setLogros(List<Logro> logros) {
         this.logros = logros;
     }
+
+    public List<VideojuegoJugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(List<VideojuegoJugador> jugadores) {
+        this.jugadores = jugadores;
+    }
+
+//    public List<Jugador> getJugadores() {
+//        return jugadores;
+//    }
+//
+//    public void setJugadores(List<Jugador> jugadores) {
+//        this.jugadores = jugadores;
+//    }
 
     @Override
     public int hashCode() {
