@@ -36,6 +36,7 @@ public class Videojuego implements Serializable {
     @OneToMany(mappedBy = "videojuego", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     private List<Logro> logros;
     
+    @OneToMany(mappedBy = "videojuego")
     private List<VideojuegoJugador> jugadores;
     
 //    @ManyToMany(mappedBy = "videojuegos")
